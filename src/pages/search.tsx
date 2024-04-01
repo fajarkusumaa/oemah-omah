@@ -2,9 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import Layout from "@/app/layout";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Link,
+  Image,
+} from "@nextui-org/react";
 
+interface Data {
+  title: string;
+}
 const search = () => {
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<Data[]>([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     async function fetchData() {
@@ -25,10 +37,21 @@ const search = () => {
 
   return (
     <Layout>
-      <main>
-        {datas.map((item, i) => (
-          <p key={i}>{item.title}</p>
-        ))}
+      <main className="bg-neutral-50 p-6">
+        <div className="grid grid-cols-2 gap-4">
+          {datas.map((item, i) => {
+            return (
+              <Card>
+                <CardBody>
+                  <p>
+                    Make beautiful websites regardless of your design
+                    experience.
+                  </p>
+                </CardBody>
+              </Card>
+            );
+          })}
+        </div>
       </main>
     </Layout>
   );
