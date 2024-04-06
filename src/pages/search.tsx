@@ -1,5 +1,7 @@
 "use client";
 
+// @refresh reset
+
 import React, { useEffect, useState } from "react";
 import Layout from "@/app/layout";
 import {
@@ -11,13 +13,14 @@ import {
   Link,
   Image,
 } from "@nextui-org/react";
+import { Map } from "@/components/Map";
 
 interface Data {
   title: string;
 }
 const search = () => {
   const [datas, setDatas] = useState<Data[]>([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -37,16 +40,17 @@ const search = () => {
 
   return (
     <Layout>
-      <main className="bg-neutral-50 p-6">
-        <div className="grid grid-cols-2 gap-4">
+      <main className="flex gap-8 bg-neutral-50 p-6">
+        <div className="order-2 w-1/3 bg-white">
+          <Map items={datas} />
+        </div>
+
+        <div className="order-1 grid w-2/3 grid-cols-2 gap-4">
           {datas.map((item, i) => {
             return (
-              <Card>
+              <Card key={i}>
                 <CardBody>
-                  <p>
-                    Make beautiful websites regardless of your design
-                    experience.
-                  </p>
+                  <p>{item.title}</p>
                 </CardBody>
               </Card>
             );
